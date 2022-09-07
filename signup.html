@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signup</title>
+    </head>
+
+    <style>
+         body{
+            margin: auto;
+        }
+        #navbar{
+            width:100%;
+            height:50px;
+            border:1px solid black;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        #div1{
+            width:30%;
+            height: 100%;
+            /* border:1px solid red; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #home,#login,#signup{
+            margin: 45px;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+        #signup-form-div{
+            width: 100%;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #form{
+            border:1px solid white;
+            text-align: center;
+            width: 300px;
+            height:360px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        #name{
+            margin-top: 15px;
+        }
+        #name,#cont,#mail,#pass{
+            padding: 8px;
+            width: 70%;
+        }
+        #submit{
+            height: 30px;
+            width: 80px;
+            cursor: pointer;
+        }
+        #submit:hover{
+            background-color: gray;
+            color: white;
+            border: 0;
+            border-radius: 4px;
+        }
+
+    </style>
+
+    <body>
+        <div id="navbar"></div>
+        <div id="signup-form-div">
+
+            <form id="form" onsubmit="signupform(event)">
+                <h1>Signup</h1>
+                <!--Write form input elements here-->
+                <input id="name"type="name" placeholder="name">
+                <br>   <br>
+                <input id="cont"type="tel" placeholder="phone">
+                <br>   <br>
+                <input id="mail"type="email" placeholder="email">
+                <br>   <br>
+                <input id="pass"type="password" placeholder="password">
+                <br>   <br>
+                <input id="submit"type="submit">
+
+            </form>
+
+        </div>
+    </body>
+
+</html>
+<script>
+    let navbar=  document.getElementById("navbar")
+  
+    let div1 =document.createElement("div")
+    div1.id="div1"
+  
+  
+    let home=document.createElement("a")
+    home.id="home"
+    home.innerText="Home"
+    home.href="index.html"
+    let login=document.createElement("a")
+    login.id="login"
+    login.href="login.html"
+    login.innerText="Login"
+    let signup=document.createElement("a")
+    signup.id="signup"
+    signup.href="signup.html"
+    signup.innerText="Signup"
+ 
+  
+  
+    div1.append(home,login,signup)
+    navbar.append(div1)
+
+
+
+// signup js
+
+arrsignup=JSON.parse(localStorage.getItem("signup"))||[]
+   function signupform(e){
+  e.preventDefault()
+       let form = document.getElementById("form")
+
+       let nameP=form.name.value
+       let contP=form.cont.value
+       let mailP=form.mail.value
+       let passP=form.pass.value
+       
+   flag=0;
+   flag1=0;
+   flag2=0;
+     arrsignup.map(function(ele){
+       
+        if(nameP==""&&contP==""&&mailP==""&&passP=="" || nameP==""||contP==""||mailP==""||passP==""){
+        flag=1;
+     }
+     if(contP.length!=10){
+         flag1=1;
+     }
+     if(mailP==ele.mail){
+         flag2=1;
+     }
+     })
+
+     if(flag==1){
+         alert("please enter the data")
+     }
+     else{
+         if(flag1==1){
+             alert("please enter the 10 digit phone number")
+         }
+        else if(flag2==1){
+             alert("email already exits")
+             window.location.href="login.html"
+         }
+         else{
+            let p1=new objsignup(nameP,contP,mailP,passP)  
+     arrsignup.push(p1)
+     localStorage.setItem("signup",JSON.stringify(arrsignup))
+     window.location.href="login.html"
+         }
+     }
+    
+     
+
+    
+
+   
+   }
+
+
+   function objsignup(n,c,m,p){
+       this.name=n;
+       this.cont=c,
+       this.mail=m;
+       this.pass=p;
+   }
+  
+
+
+
+  </script>

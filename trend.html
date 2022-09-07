@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #container{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows:repeat(auto);
+        gap:15px;
+    }
+    #container>div{
+        border:1px solid black;
+        overflow: hidden;
+        /* height: 300px; */
+    }
+    #img{
+        width: 100%;
+        height: 60%;
+    }
+</style>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    const url = ` https://api.themoviedb.org/3/movie/top_rated?api_key=b453377692efe193c5cc9fdc9829b804&language=%20ISO%203166-1&page=1`
+
+    fetch(url)
+    .then(function(res){
+        return res.json()
+      
+    })
+    .then(function(res){
+        console.log(res.results)
+        appendmovies(res.results)
+    })
+
+
+    function appendmovies(data){
+const container=document.getElementById("container")
+        data.forEach(function(ele){
+            let img_url = "https://image.tmdb.org/t/p/w500";
+            let div= document.createElement("div") 
+
+            let img=document.createElement("img")
+            img.id="img"
+            img.src=img_url+ele.poster_path
+
+            let Title=document.createElement("h4")
+            Title.innerText=ele.title
+            let Dis=document.createElement("p")
+            Dis.innerText=ele.overview
+            
+            div.append(img,Title,Dis)
+            container.append(div)
+               })
+    }
+
+
+
+    
+</script>

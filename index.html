@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+    </head>
+    <style>
+         body{
+            margin: auto;
+        }
+        #navbar{
+            width:100%;
+            height:50px;
+            background-color:black;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            font-family: sans-serif;
+             position: fixed;
+             top:0;
+        }
+        #div1{
+            width:30%;
+            height: 100%;
+            /* border:1px solid red; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        
+        }
+        #home,#login,#signup{
+            margin: 45px;
+            cursor: pointer;
+            text-decoration: none;
+            color:white;
+        }
+
+
+        /* slidshow */
+
+        #slideshow{
+          width: 100%;
+          height: 300px;
+          margin-top: 50px;
+        }
+        #slideimg{
+            width: 100%;
+            height:300px;
+        }
+        
+
+        /* movies */
+
+        #movies{
+            width:90%;
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap:10px;
+            margin: auto;
+        
+        }
+
+        #div2{
+            border: 1px solid aliceblue;
+             /* margin-left: 40px; */
+             text-align: center;
+             line-height: 10px;
+             height: 370px;
+             margin-top: 25px;
+             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+        #div2:hover{
+            border: 2px solid black;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+
+        #poster{
+            width: 100%;
+            height: 70%;
+        }
+
+        /* sort button */
+
+        #sort-buttons{
+            margin-top: 10px;
+            
+        }
+        #sort_lh{
+            margin-left: 78px;
+        }
+        #sort_lh,#sort_hl{
+            width:130px;
+            height: 30px;
+            font-size: 13px;
+            font-weight:500;
+            text-align: center;
+            cursor: pointer; 
+            background-color: rgb(36, 35, 35);
+            color: white;
+            border-radius: 12px;
+        }
+
+
+        @media screen and (max-width: 1000px){
+            #movies{
+            grid-template-columns: repeat(3,1fr);
+            gap:8px;
+        }
+        #sort_lh,#sort_hl{
+            width:130px;
+            height: 35px;
+        }
+       
+        }
+
+        @media screen and (max-width: 700px){
+            #movies{
+            grid-template-columns: repeat(2,1fr);
+            gap:8px;
+        }
+        #sort_lh,#sort_hl{
+            width:150px;
+            height: 45px;
+        }
+      
+        }
+
+        @media screen and (max-width: 500px){
+            #movies{
+            grid-template-columns: repeat(1,1fr);
+            gap:8px;
+        }
+        #sort_lh,#sort_hl{
+            width:150px;
+            height: 55px;
+        }
+        #sort_lh{
+            margin-left: 35px;
+        }
+        }
+        
+        @media screen and (max-width: 300px){
+            #movies{
+            grid-template-columns: repeat(1,1fr);
+            gap:8px;
+        }
+        #sort_lh,#sort_hl{
+            width:70px;
+            height: 55px;
+        }
+        #sort_lh{
+            margin-left: 30px;
+        }
+        }
+    </style>
+
+    <body>
+        <div id="navbar"></div>
+        <div id="slideshow">
+            <!--Show Slideshow here-->
+           
+
+        </div>
+
+        <div id="sort-buttons">
+
+            <!--Add sorting here-->
+            <button id="sort_lh" onclick="sort_lh()">Low rating to High</button>
+            <button id="sort_hl"  onclick="sort_hl()">High rating to Low</button>
+
+        </div>
+        <div id="movies">
+            <!--Show list of movies here-->
+           
+
+        </div>
+    </body>
+
+</html>
+<script>
+  let navbar=  document.getElementById("navbar")
+
+  let div1 =document.createElement("div")
+  div1.id="div1"
+
+
+  let home=document.createElement("a")
+  home.id="home"
+  home.innerText="Home"
+  home.href="index.html"
+  let login=document.createElement("a")
+  login.id="login"
+  login.href="login.html"
+  login.innerText="Login"
+  let signup=document.createElement("a")
+  signup.id="signup"
+  signup.innerText="Signup"
+  signup.href="signup.html"
+
+
+  div1.append(home,login,signup)
+  navbar.append(div1)
+
+
+arrslide=[{image:"https://images.unsplash.com/photo-1649651738909-967f63511615?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"},
+          {image:"https://images.unsplash.com/photo-1649452814987-ece76376762a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0NHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"},
+          {image:"https://images.unsplash.com/photo-1577966890878-c33ba2b20b73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0N3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"}
+        ]
+
+
+  let slide_div=document.getElementById("slideshow")
+
+  let i=0;
+  let img=document.createElement("img")
+  img.id="slideimg"
+
+  setInterval(function(){
+      if(i==arrslide.length){
+          i=0;
+      }
+      slide_div.innerText=null;
+      img.src=arrslide[i].image
+      slide_div.append(img)
+     
+      i++
+  },1500)
+
+  localStorage.setItem("slideimage",JSON.stringify(arrslide))
+
+
+
+
+
+  let arrmovie=[{posterobj:"https://m.media-amazon.com/images/I/61x4qv9fW0L._AC_UL320_.jpg",
+                 nameobj:"Jaane Bhi Do Yaaro",
+                  rdobj:"10-april-2022",
+                   ratingobj:"4.0"},
+
+                   {posterobj:"https://m.media-amazon.com/images/I/71DwA1fNZ3L._AC_UL320_.jpg",
+                 nameobj:"Golmaal ",
+                  rdobj:"10-april-2022",
+                   ratingobj:"4.5"},
+
+                   {posterobj:"https://m.media-amazon.com/images/I/71UzEBEB2wS._AC_UL320_.jpg",
+                 nameobj:"Deewar",
+                  rdobj:"10-april-2022",
+                   ratingobj:"4.5"},
+
+                   {posterobj:"https://m.media-amazon.com/images/I/61s0MxFbk2L._AC_UL320_.jpg",
+                 nameobj:"Phir Hera Pheri",
+                  rdobj:"10-april-2022",
+                   ratingobj:"4.5"},
+
+                   {posterobj:"https://m.media-amazon.com/images/I/811D+0y5PtL._AC_UL320_.jpg",
+                 nameobj:"Amar Akbar Anthony",
+                  rdobj:"10-april-2022",
+                   ratingobj:"4.0"},
+
+                   {posterobj:"https://m.media-amazon.com/images/I/61NhAcNBC+L._AC_UL320_.jpg",
+                 nameobj:"Sholay",
+                  rdobj:"9-april-2022",
+                   ratingobj:"4.5"},
+
+                   {posterobj:"https://m.media-amazon.com/images/I/71cnz6fRbNL._AC_UL320_.jpg",
+                 nameobj:"Life is Beautiful",
+                  rdobj:"11-april-2022",
+                   ratingobj:"4.0"},
+
+                   {posterobj:"https://m.media-amazon.com/images/I/61j-9zPZX9L._AC_UL320_.jpg",
+                 nameobj:"1917",
+                  rdobj:"11-april-2022",
+                   ratingobj:"4.0"},
+                   
+                   {posterobj:"https://m.media-amazon.com/images/I/51U5+eGmPDL._AC_UL320_.jpg",
+                 nameobj:"Inephos",
+                  rdobj:"12-april-2022",
+                   ratingobj:"3.5"}
+                ]
+
+display(arrmovie)
+
+function display(arrmovie){
+    document.getElementById("movies").innerText=null
+   
+  let movies_div=document.getElementById("movies")
+  
+  arrmovie.map(function(ele){
+      let div2=document.createElement("div")
+      div2.id="div2"
+
+      let poster=document.createElement("img")
+      poster.id="poster"
+      poster.src=ele.posterobj
+
+      let name1=document.createElement("h2")
+      name1.id="name1"
+      name1.innerText=ele.nameobj
+
+      let release_date=document.createElement("p")
+      release_date.id="rd"
+      release_date.innerText=ele.rdobj
+
+      let rating=document.createElement("p")
+      rating.id="rating"
+      rating.innerText=`${ele.ratingobj}*`
+
+      div2.append(poster,name1,release_date,rating)
+      movies_div.append(div2)     
+      localStorage.setItem("movies",JSON.stringify(arrmovie))
+  })
+
+
+
+}
+
+ function sort_lh(){
+  
+  let sort1= arrmovie.sort(function(a,b){
+     return Number(a.ratingobj)-Number(b.ratingobj)
+        
+    })
+   
+    display(sort1)
+ }
+
+ function sort_hl(){
+   
+   let sort2= arrmovie.sort(function(a,b){
+      return Number(b.ratingobj)-Number(a.ratingobj)
+         
+     })
+    
+     display(sort2)
+  }
+</script>
